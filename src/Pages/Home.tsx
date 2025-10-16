@@ -481,7 +481,7 @@ const Portfolio = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
+            {projects.map((project) => (
               <div key={project.title} className="group relative">
                 <div
                   className={`absolute -inset-1 bg-gradient-to-r ${project.gradient} rounded-3xl blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`}
