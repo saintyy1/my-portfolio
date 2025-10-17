@@ -38,6 +38,16 @@ const Portfolio = () => {
   const [projectsRef, projectsHasBeenInView] = useInView();
   const [contactRef, contactHasBeenInView] = useInView();
 
+  // keep html root class in sync so global background matches current theme
+  useEffect(() => {
+    const el = document.documentElement
+    if (darkMode) {
+      el.classList.add("dark")
+    } else {
+      el.classList.remove("dark")
+    }
+  }, [darkMode])
+
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY)
