@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Home from "./Pages/Home";
+import "./index.css";
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(true);

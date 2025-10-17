@@ -25,10 +25,10 @@ import project3 from "../assets/project3.png";
 import project4 from "../assets/project4.png";
 import { useInView } from "../hooks/useInView"
 
-type HomeProps = {
-  darkMode: boolean;
-  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
-};
+interface HomeProps {
+  darkMode: boolean
+  setDarkMode: (mode: boolean) => void
+}
 
 const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -221,7 +221,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         )}
       </nav>
 
-      <section id="home" ref={homeRef} className={`relative min-h-screen flex items-center justify-center pt-20 transition-opacity duration-1000 ${homeHasBeenInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+      <section id="home" ref={homeRef} className={`relative min-h-screen flex items-center justify-center pt-20 transition-opacity duration-1000 ${homeHasBeenInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <div className="space-y-10">
             <div
@@ -315,7 +315,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         </div>
       </section>
 
-      <section id="about" ref={aboutRef} className={`relative py-32 px-6 lg:px-8 transition-opacity duration-1000 ${aboutHasBeenInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+      <section id="about" ref={aboutRef} className={`relative py-32 px-6 lg:px-8 transition-opacity duration-1000 ${aboutHasBeenInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
@@ -424,7 +424,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         </div>
       </section>
 
-      <section id="skills" ref={skillsRef} className={`relative py-32 px-6 lg:px-8 transition-opacity duration-1000 ${skillsHasBeenInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+      <section id="skills" ref={skillsRef} className={`relative py-32 px-6 lg:px-8 transition-opacity duration-1000 ${skillsHasBeenInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
         <div className="relative max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
@@ -476,7 +476,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         </div>
       </section>
 
-      <section id="projects" ref={projectsRef} className={`relative py-32 px-6 lg:px-8 transition-opacity duration-1000 ${projectsHasBeenInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+      <section id="projects" ref={projectsRef} className={`relative py-32 px-6 lg:px-8 transition-opacity duration-1000 ${projectsHasBeenInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
@@ -563,7 +563,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         </div>
       </section>
 
-      <section id="contact" ref={contactRef} className={`relative py-32 px-6 lg:px-8 transition-opacity duration-1000 ${contactHasBeenInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+      <section id="contact" ref={contactRef} className={`relative py-32 px-6 lg:px-8 transition-opacity duration-1000 ${contactHasBeenInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
         <div className="relative max-w-4xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
