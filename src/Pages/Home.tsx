@@ -25,8 +25,12 @@ import project3 from "../assets/project3.png";
 import project4 from "../assets/project4.png";
 import { useInView } from "../hooks/useInView"
 
-const Portfolio = () => {
-  const [darkMode, setDarkMode] = useState(true)
+type HomeProps = {
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrollY, setScrollY] = useState(0)
   const [activeSection, setActiveSection] = useState("home")
@@ -37,16 +41,6 @@ const Portfolio = () => {
   const [skillsRef, skillsHasBeenInView] = useInView();
   const [projectsRef, projectsHasBeenInView] = useInView();
   const [contactRef, contactHasBeenInView] = useInView();
-
-  // keep html root class in sync so global background matches current theme
-  useEffect(() => {
-    const el = document.documentElement
-    if (darkMode) {
-      el.classList.add("dark")
-    } else {
-      el.classList.remove("dark")
-    }
-  }, [darkMode])
 
   useEffect(() => {
     const handleScroll = () => {
