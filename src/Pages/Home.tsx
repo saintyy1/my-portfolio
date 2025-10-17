@@ -187,7 +187,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setDarkMode(!darkMode)}
-                className={`p-2.5 rounded-full ${darkMode ? "bg-white/5 hover:bg-white/10 border-white/5 hover:border-white/10" : "bg-slate-100 hover:bg-slate-200 border-slate-200 hover:border-slate-300"} border transition-all duration-300 ${darkMode ? "text-white" : "text-slate-900"}`}
+                className={`p-2.5 hidden rounded-full ${darkMode ? "bg-white/5 hover:bg-white/10 border-white/5 hover:border-white/10" : "bg-slate-100 hover:bg-slate-200 border-slate-200 hover:border-slate-300"} border transition-all duration-300 ${darkMode ? "text-white" : "text-slate-900"}`}
               >
                 {darkMode ? <Sun size={18} /> : <Moon size={18} />}
               </button>
