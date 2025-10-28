@@ -33,6 +33,8 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrollY, setScrollY] = useState(0)
   const [activeSection, setActiveSection] = useState("home")
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" })
+  const [formStatus, setFormStatus] = useState("")
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,6 +61,43 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
   const scrollToSection = (id: string): void => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
     setMobileMenuOpen(false)
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setFormStatus("sending")
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        setFormStatus("success")
+        setFormData({ name: "", email: "", message: "" })
+        setTimeout(() => setFormStatus(""), 5000)
+      } else {
+        setFormStatus("error")
+      }
+    } catch (error) {
+      setFormStatus("error")
+    }
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   
@@ -535,7 +574,8 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
 
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-500 rounded-3xl blur-2xl opacity-10 group-hover:opacity-20 transition-opacity duration-500" />
-            <div
+            <form
+              onSubmit={handleSubmit}
               className={`relative ${darkMode ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"} rounded-3xl p-10 border`}
             >
               <div className="space-y-6">
@@ -548,9 +588,12 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
                     </label>
                     <input
                       type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
                       placeholder="John Doe"
                       required
-                      className={`w-full px-4 py-3 rounded-xl ${darkMode ? "bg-white/5 border-white/10 focus:border-white/30 text-white placeholder-gray-600" : "bg-white border-slate-300 focus:border-slate-400 text-slate-900 placeholder-slate-400"} border focus:outline-none transition-all text-sm`}
+                      className={`w-full px-4 py-3 rounded-xl ${darkMode ? "bg-white/5 border-white/10 focus:border-white/30 text-white placeholder-gray-600" : "bg-white border-slate-300 focus:border-slate-400 text-slate-900 placeholder-slate-400"} border focus:outline-none text-sm`}
                     />
                   </div>
                   <div>
@@ -561,9 +604,12 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
                     </label>
                     <input
                       type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
                       placeholder="john@example.com"
                       required
-                      className={`w-full px-4 py-3 rounded-xl ${darkMode ? "bg-white/5 border-white/10 focus:border-white/30 text-white placeholder-gray-600" : "bg-white border-slate-300 focus:border-slate-400 text-slate-900 placeholder-slate-400"} border focus:outline-none transition-all text-sm`}
+                      className={`w-full px-4 py-3 rounded-xl ${darkMode ? "bg-white/5 border-white/10 focus:border-white/30 text-white placeholder-gray-600" : "bg-white border-slate-300 focus:border-slate-400 text-slate-900 placeholder-slate-400"} border focus:outline-none text-sm`}
                     />
                   </div>
                 </div>
@@ -574,21 +620,34 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
                   </label>
                   <textarea
                     rows={6}
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
                     placeholder="Tell me about your amazing project idea..."
                     required
-                    className={`w-full px-4 py-3 rounded-xl ${darkMode ? "bg-white/5 border-white/10 focus:border-white/30 text-white placeholder-gray-600" : "bg-white border-slate-300 focus:border-slate-400 text-slate-900 placeholder-slate-400"} border focus:outline-none transition-all resize-none text-sm`}
+                    className={`w-full px-4 py-3 rounded-xl ${darkMode ? "bg-white/5 border-white/10 focus:border-white/30 text-white placeholder-gray-600" : "bg-white border-slate-300 focus:border-slate-400 text-slate-900 placeholder-slate-400"} border focus:outline-none resize-none text-sm`}
                   ></textarea>
                 </div>
 
+                {formStatus === "success" && (
+                  <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-xl text-green-500 text-sm text-center">
+                    ✅ Message sent successfully! I'll get back to you soon.
+                  </div>
+                )}
+
+                {formStatus === "error" && (
+                  <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-500 text-sm text-center">
+                    ❌ Failed to send message. Please try again or email me directly.
+                  </div>
+                )}
+
                 <button
-                  onClick={(e) => {
-                    e.preventDefault()
-                    alert("🚀 Message sent! I'll get back to you soon!")
-                  }}
-                  className="w-full py-4 bg-white text-slate-950 rounded-xl font-semibold text-sm flex items-center justify-center gap-2"
+                  type="submit"
+                  disabled={formStatus === "sending"}
+                  className={`w-full py-4 bg-white text-slate-950 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 ${formStatus === "sending" ? "opacity-50 cursor-not-allowed" : ""}`}
                 >
                   <Mail size={18} />
-                  Send Message
+                  {formStatus === "sending" ? "Sending..." : "Send Message"}
                   <Sparkles size={18} />
                 </button>
               </div>
@@ -613,7 +672,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
                   ))}
                 </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </section>
