@@ -57,7 +57,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
   }, [])
 
   const scrollToSection = (id: string): void => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "auto" })
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
     setMobileMenuOpen(false)
   }
 
@@ -69,26 +69,25 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
     ];
 
   const skills = [
-    { name: "HTML5", level: 90, icon: "🎨", gradient: "from-orange-400 via-red-500 to-pink-500" },
-    { name: "CSS3", level: 85, icon: "💎", gradient: "from-blue-400 via-cyan-500 to-teal-400" },
-    { name: "JavaScript", level: 80, icon: "⚡", gradient: "from-yellow-400 via-orange-500 to-red-500" },
-    { name: "React.js", level: 80, icon: "⚛️", gradient: "from-cyan-400 via-blue-500 to-indigo-600" },
-    { name: "Tailwind", level: 85, icon: "🎯", gradient: "from-teal-400 via-cyan-500 to-blue-500" },
-    { name: "Firebase", level: 90, icon: "🔥", gradient: "from-green-400 via-emerald-500 to-teal-600" },
-    { name: "Git", level: 87, icon: "🚀", gradient: "from-orange-500 via-red-600 to-pink-600" },
-    { name: "TypeScript", level: 75, icon: "💙", gradient: "from-blue-500 via-indigo-600 to-purple-700" },
+    { name: "HTML5", icon: "🎨", gradient: "from-orange-400 via-red-500 to-pink-500" },
+    { name: "CSS3", icon: "💎", gradient: "from-blue-400 via-cyan-500 to-teal-400" },
+    { name: "JavaScript", icon: "⚡", gradient: "from-yellow-400 via-orange-500 to-red-500" },
+    { name: "React.js", icon: "⚛️", gradient: "from-cyan-400 via-blue-500 to-indigo-600" },
+    { name: "Tailwind", icon: "🎯", gradient: "from-teal-400 via-cyan-500 to-blue-500" },
+    { name: "Firebase", icon: "🔥", gradient: "from-green-400 via-emerald-500 to-teal-600" },
+    { name: "Git", icon: "🚀", gradient: "from-orange-500 via-red-600 to-pink-600" },
+    { name: "TypeScript", icon: "💙", gradient: "from-blue-500 via-indigo-600 to-purple-700" },
   ]
 
   const projects = [
     {
-      title: "ShopNow",
-      description:
-        "Full-featured shopping experience with advanced cart management, real-time inventory, and seamless checkout flow.",
-      tech: ["React", "Tailwind CSS", "JavaScript", "Firebase"],
-      gradient: "from-purple-600 via-pink-600 to-red-600",
-      image: project3,
-      demoUrl: "https://saintyy1.github.io/Ecommerce-app/",
-      githubUrl: "https://github.com/saintyy1/Ecommerce-app"
+      title: "NovlNest",
+      description: "A novel platform for readers and writers to share and discover stories.",
+      tech: ["React.ts", "Tailwind CSS", "Firebase", "Node.js"],
+      gradient: "from-blue-400 via-cyan-500 to-teal-600",
+      image: project1,
+      demoUrl: "https://novlnest.com/",
+      githubUrl: "https://github.com/saintyy1/Novel-app"
     },
     {
       title: "CS Flashcards",
@@ -101,13 +100,14 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
       githubUrl: "https://github.com/saintyy1/FlashCard-Learning-app-main"
     },
     {
-      title: "NovlNest",
-      description: "A novel platform for readers and writers to share and discover stories.",
-      tech: ["React.ts", "Tailwind CSS", "Firebase", "Node.js"],
-      gradient: "from-blue-400 via-cyan-500 to-teal-600",
-      image: project1,
-      demoUrl: "https://novlnest.com/",
-      githubUrl: "https://github.com/saintyy1/Novel-app"
+      title: "ShopNow",
+      description:
+        "Full-featured shopping experience with advanced cart management, real-time inventory, and seamless checkout flow.",
+      tech: ["React", "Tailwind CSS", "JavaScript", "Firebase"],
+      gradient: "from-purple-600 via-pink-600 to-red-600",
+      image: project3,
+      demoUrl: "https://saintyy1.github.io/Ecommerce-app/",
+      githubUrl: "https://github.com/saintyy1/Ecommerce-app"
     },
     {
       title: "Insure",
@@ -423,19 +423,6 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
                     <h3 className={`text-lg font-semibold ${darkMode ? "text-white" : "text-slate-900"}`}>
                       {skill.name}
                     </h3>
-                    <div
-                      className={`relative w-full h-1.5 ${darkMode ? "bg-white/10" : "bg-slate-200"} rounded-full overflow-hidden`}
-                    >
-                      <div
-                        className={`absolute inset-y-0 left-0 bg-gradient-to-r ${skill.gradient} rounded-full transition-all duration-1000`}
-                        style={{ width: `${skill.level}%` }}
-                      />
-                    </div>
-                    <div
-                      className={`text-sm font-semibold bg-gradient-to-r ${skill.gradient} bg-clip-text text-transparent`}
-                    >
-                      {skill.level}%
-                    </div>
                   </div>
                 </div>
               </div>
