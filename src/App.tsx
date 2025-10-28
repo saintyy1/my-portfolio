@@ -4,7 +4,7 @@ import Home from "./Pages/Home";
 import "./index.css";
 
 const App = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   // ensure the <html> and <body> background/class is controlled at app root
   useEffect(() => {

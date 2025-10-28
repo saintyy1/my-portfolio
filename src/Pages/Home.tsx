@@ -23,7 +23,6 @@ import project1 from "../assets/project1.png";
 import project2 from "../assets/project2.png";
 import project3 from "../assets/project3.png";
 import project4 from "../assets/project4.png";
-import { useInView } from "../hooks/useInView"
 
 interface HomeProps {
   darkMode: boolean
@@ -35,11 +34,6 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
   const [scrollY, setScrollY] = useState(0)
   const [activeSection, setActiveSection] = useState("home")
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-
-  const [aboutRef, , aboutHasBeenInView] = useInView();
-  const [skillsRef, , skillsHasBeenInView] = useInView();
-  const [projectsRef, , projectsHasBeenInView] = useInView();
-  const [contactRef, , contactHasBeenInView] = useInView();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -314,7 +308,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         </div>
       </section>
 
-      <section id="about" ref={aboutRef} className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-500 ${aboutHasBeenInView ? "opacity-100" : "opacity-40"}`}>
+      <section id="about" className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"}`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
@@ -423,7 +417,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         </div>
       </section>
 
-      <section id="skills" ref={skillsRef} className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-500 ${skillsHasBeenInView ? "opacity-100" : "opacity-40"}`}>
+      <section id="skills" className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"}`}>
         <div className="relative max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
@@ -475,7 +469,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         </div>
       </section>
 
-      <section id="projects" ref={projectsRef} className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-500 ${projectsHasBeenInView ? "opacity-100" : "opacity-40"}`}>
+      <section id="projects" className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"}`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
@@ -562,7 +556,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         </div>
       </section>
 
-      <section id="contact" ref={contactRef} className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-500 ${contactHasBeenInView ? "opacity-100" : "opacity-40"}`}>
+      <section id="contact" className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"}`}>
         <div className="relative max-w-4xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">

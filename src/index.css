@@ -30,13 +30,6 @@ body.dark {
   backface-visibility: hidden;
 }
 
-/* Add performance optimizations for section animations */
-section {
-  will-change: opacity;
-  /* Ensure sections always have a background to prevent flashing */
-  background-color: inherit;
-  isolation: isolate;
-}
 
 /* Optimize backdrop blur performance */
 [class*="backdrop-blur"] {
