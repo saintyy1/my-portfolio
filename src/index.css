@@ -27,8 +27,7 @@ html.dark, body.dark {
 
 /* Add performance optimizations for section animations */
 section {
-  will-change: opacity, transform;
-  contain: layout style paint;
+  will-change: opacity;
 }
 
 /* Optimize backdrop blur performance */

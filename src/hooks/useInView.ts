@@ -12,7 +12,10 @@ export function useInView(threshold = 0.1) {
         setInView(entry.isIntersecting);
         if (entry.isIntersecting) setHasBeenInView(true);
       },
-      { threshold }
+      { 
+        threshold,
+        rootMargin: "50px" // Trigger animation slightly before element enters viewport
+      }
     );
     observer.observe(ref.current);
     return () => observer.disconnect();

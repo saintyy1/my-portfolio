@@ -187,7 +187,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setDarkMode(!darkMode)}
-                className={`p-2.5 hidden rounded-full ${darkMode ? "bg-white/5 hover:bg-white/10 border-white/5 hover:border-white/10" : "bg-slate-100 hover:bg-slate-200 border-slate-200 hover:border-slate-300"} border transition-all duration-300 ${darkMode ? "text-white" : "text-slate-900"}`}
+                className={`p-2.5 rounded-full ${darkMode ? "bg-white/5 hover:bg-white/10 border-white/5 hover:border-white/10" : "bg-slate-100 hover:bg-slate-200 border-slate-200 hover:border-slate-300"} border transition-all duration-300 ${darkMode ? "text-white" : "text-slate-900"}`}
               >
                 {darkMode ? <Sun size={18} /> : <Moon size={18} />}
               </button>
@@ -221,7 +221,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         )}
       </nav>
 
-      <section id="home" ref={homeRef} className={`relative min-h-screen flex items-center justify-center pt-20 transition-opacity duration-1000 ${homeHasBeenInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+      <section id="home" ref={homeRef} className={`relative min-h-screen flex items-center justify-center pt-20 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-700 ${homeHasBeenInView ? "opacity-100" : "opacity-0"}`}>
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <div className="space-y-10">
             <div
@@ -315,7 +315,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         </div>
       </section>
 
-      <section id="about" ref={aboutRef} className={`relative py-32 px-6 lg:px-8 transition-opacity duration-1000 ${aboutHasBeenInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+      <section id="about" ref={aboutRef} className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-700 ${aboutHasBeenInView ? "opacity-100" : "opacity-0"}`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
@@ -424,7 +424,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         </div>
       </section>
 
-      <section id="skills" ref={skillsRef} className={`relative py-32 px-6 lg:px-8 transition-opacity duration-1000 ${skillsHasBeenInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+      <section id="skills" ref={skillsRef} className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-700 ${skillsHasBeenInView ? "opacity-100" : "opacity-0"}`}>
         <div className="relative max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
@@ -476,7 +476,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         </div>
       </section>
 
-      <section id="projects" ref={projectsRef} className={`relative py-32 px-6 lg:px-8 transition-opacity duration-1000 ${projectsHasBeenInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+      <section id="projects" ref={projectsRef} className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-700 ${projectsHasBeenInView ? "opacity-100" : "opacity-0"}`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
@@ -563,7 +563,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         </div>
       </section>
 
-      <section id="contact" ref={contactRef} className={`relative py-32 px-6 lg:px-8 transition-opacity duration-1000 ${contactHasBeenInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+      <section id="contact" ref={contactRef} className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-700 ${contactHasBeenInView ? "opacity-100" : "opacity-0"}`}>
         <div className="relative max-w-4xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
