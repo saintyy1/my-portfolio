@@ -33,7 +33,6 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrollY, setScrollY] = useState(0)
   const [activeSection, setActiveSection] = useState("home")
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,20 +50,14 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
       if (current) setActiveSection(current)
     }
 
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-
     window.addEventListener("scroll", handleScroll)
-    window.addEventListener("mousemove", handleMouseMove)
     return () => {
       window.removeEventListener("scroll", handleScroll)
-      window.removeEventListener("mousemove", handleMouseMove)
     }
   }, [])
 
   const scrollToSection = (id: string): void => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+    document.getElementById(id)?.scrollIntoView({ behavior: "auto" })
     setMobileMenuOpen(false)
   }
 
@@ -130,28 +123,10 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
 
   return (
     <div
-      className={`min-h-screen ${darkMode ? "bg-slate-950" : "bg-white"} transition-colors duration-700 overflow-x-hidden`}
+      className={`min-h-screen ${darkMode ? "bg-slate-950" : "bg-white"} overflow-x-hidden`}
     >
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div
-          className={`absolute w-[1000px] h-[1000px] rounded-full blur-[128px] transition-all duration-700 ease-out ${darkMode ? "opacity-10" : "opacity-5"}`}
-          style={{
-            background:
-              "radial-gradient(circle, rgba(139, 92, 246, 0.4), rgba(236, 72, 153, 0.3), rgba(245, 158, 11, 0.2))",
-            top: `${mousePosition.y - 500}px`,
-            left: `${mousePosition.x - 500}px`,
-          }}
-        />
-        <div
-          className={`absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-cyan-500/5 via-blue-600/5 to-purple-700/5 rounded-full blur-[100px] ${darkMode ? "opacity-100" : "opacity-50"}`}
-        />
-        <div
-          className={`absolute bottom-0 left-0 w-[700px] h-[700px] bg-gradient-to-tr from-pink-500/5 via-red-500/5 to-orange-500/5 rounded-full blur-[100px] ${darkMode ? "opacity-100" : "opacity-50"}`}
-        />
-      </div>
-
       <nav
-        className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrollY > 50 ? `${darkMode ? "bg-slate-950/70" : "bg-white/70"} backdrop-blur-xl ${darkMode ? "border-white/5" : "border-slate-200"} border-b shadow-lg ${darkMode ? "shadow-black/5" : "shadow-slate-200/50"}` : ""}`}
+        className={`fixed top-0 w-full z-50 ${scrollY > 50 ? `${darkMode ? "bg-slate-950" : "bg-white"} ${darkMode ? "border-white/5" : "border-slate-200"} border-b shadow-lg ${darkMode ? "shadow-black/5" : "shadow-slate-200/50"}` : `${darkMode ? "bg-slate-950" : "bg-white"}`}`}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
@@ -160,13 +135,13 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
             </div>
 
             <div
-              className={`hidden md:flex items-center gap-1 ${darkMode ? "bg-slate-900/40" : "bg-slate-100"} backdrop-blur-xl rounded-full p-1.5 ${darkMode ? "border-white/5" : "border-slate-200"} border`}
+              className={`hidden md:flex items-center gap-1 ${darkMode ? "bg-slate-900/40" : "bg-slate-100"} rounded-full p-1.5 ${darkMode ? "border-white/5" : "border-slate-200"} border`}
             >
               {["Home", "About", "Skills", "Projects", "Contact"].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
-                  className={`px-5 py-2 rounded-full transition-all duration-300 text-sm font-medium ${
+                  className={`px-5 py-2 rounded-full text-sm font-medium ${
                     activeSection === item.toLowerCase()
                       ? `${darkMode ? "bg-white/10 text-white shadow-lg shadow-white/5" : "bg-white text-slate-900 shadow-lg shadow-slate-200"}`
                       : `${darkMode ? "text-gray-400 hover:text-white hover:bg-white/5" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"}`
@@ -180,14 +155,14 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setDarkMode(!darkMode)}
-                className={`p-2.5 rounded-full ${darkMode ? "bg-white/5 hover:bg-white/10 border-white/5 hover:border-white/10" : "bg-slate-100 hover:bg-slate-200 border-slate-200 hover:border-slate-300"} border transition-all duration-300 ${darkMode ? "text-white" : "text-slate-900"}`}
+                className={`p-2.5 rounded-full ${darkMode ? "bg-white/5 hover:bg-white/10 border-white/5 hover:border-white/10" : "bg-slate-100 hover:bg-slate-200 border-slate-200 hover:border-slate-300"} border ${darkMode ? "text-white" : "text-slate-900"}`}
               >
                 {darkMode ? <Sun size={18} /> : <Moon size={18} />}
               </button>
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`md:hidden p-2.5 rounded-full ${darkMode ? "bg-white/5 hover:bg-white/10 border-white/5" : "bg-slate-100 hover:bg-slate-200 border-slate-200"} border transition-all duration-300 ${darkMode ? "text-white" : "text-slate-900"}`}
+                className={`md:hidden p-2.5 rounded-full ${darkMode ? "bg-white/5 hover:bg-white/10 border-white/5" : "bg-slate-100 hover:bg-slate-200 border-slate-200"} border ${darkMode ? "text-white" : "text-slate-900"}`}
               >
                 {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
@@ -197,7 +172,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
 
         {mobileMenuOpen && (
           <div
-            className={`md:hidden ${darkMode ? "bg-slate-950/95" : "bg-white/95"} backdrop-blur-2xl ${darkMode ? "border-white/5" : "border-slate-200"} border-t`}
+            className={`md:hidden ${darkMode ? "bg-slate-950/95" : "bg-white/95"} ${darkMode ? "border-white/5" : "border-slate-200"} border-t`}
           >
             <div className="px-6 py-6 space-y-2">
               {["Home", "About", "Skills", "Projects", "Contact"].map((item) => (
@@ -218,7 +193,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <div className="space-y-10">
             <div
-              className={`inline-flex items-center gap-2 px-4 py-2 ${darkMode ? "bg-white/5" : "bg-slate-100"} backdrop-blur-xl ${darkMode ? "border-white/10" : "border-slate-200"} border rounded-full`}
+              className={`inline-flex items-center gap-2 px-4 py-2 ${darkMode ? "bg-white/5" : "bg-slate-100"} ${darkMode ? "border-white/10" : "border-slate-200"} border rounded-full`}
             >
               <Sparkles className="text-yellow-400" size={16} />
               <span className="text-sm font-medium bg-gradient-to-r from-cyan-400 to-pink-500 bg-clip-text text-transparent">
@@ -254,7 +229,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
               <button
                 onClick={() => scrollToSection("projects")}
-                className="group px-8 py-4 bg-white text-slate-950 rounded-full font-semibold text-sm hover:scale-105 transition-all duration-300 shadow-lg shadow-white/10 hover:shadow-white/20 flex items-center gap-2"
+                className="group px-8 py-4 bg-white text-slate-950 rounded-full font-semibold text-sm shadow-lg shadow-white/10 flex items-center gap-2"
               >
                 <Zap size={18} className="group-hover:rotate-12 transition-transform" />
                 Explore My Work
@@ -266,7 +241,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
                         darkMode
                             ? "border-white/10 hover:bg-white/5 hover:border-white/20"
                             : "border-slate-300 hover:bg-slate-100 hover:border-slate-400"
-                        } border rounded-full font-semibold text-sm transition-all duration-300 flex items-center gap-2 ${
+                        } border rounded-full font-semibold text-sm flex items-center gap-2 ${
                         darkMode ? "text-white" : "text-slate-900"
                         }`}
                     >
@@ -287,7 +262,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
                         darkMode
                             ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
                             : "bg-slate-100 border-slate-200 hover:bg-slate-200 hover:border-slate-300"
-                        } backdrop-blur-xl rounded-xl border hover:scale-110 transition-all duration-300`}
+                        } rounded-xl border`}
                     >
                         <Icon size={20} className={darkMode ? "text-gray-400" : "text-slate-600"} />
                     </a>
@@ -327,10 +302,10 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-500 rounded-3xl blur-2xl opacity-10 group-hover:opacity-20 transition-opacity duration-500" />
               <div
-                className={`relative ${darkMode ? "bg-white/5" : "bg-slate-50"} backdrop-blur-xl rounded-3xl p-10 ${darkMode ? "border-white/10" : "border-slate-200"} border`}
+                className={`relative ${darkMode ? "bg-white/5" : "bg-slate-50"} rounded-3xl p-10 ${darkMode ? "border-white/10" : "border-slate-200"} border`}
               >
                 <div className="relative mb-6">
-                    <div className="w-48 h-48 mx-auto bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-600 rounded-3xl shadow-2xl shadow-purple-500/20 transform hover:scale-105 hover:rotate-3 transition-all duration-500 overflow-hidden">
+                    <div className="w-48 h-48 mx-auto bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-600 rounded-3xl shadow-2xl shadow-purple-500/20 overflow-hidden">
                         <img
                             src={avatar}
                             alt="Profile"
@@ -354,7 +329,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
 
             <div className="space-y-6">
               <div
-                className={`p-6 ${darkMode ? "bg-white/5 border-white/10 hover:border-white/20" : "bg-slate-50 border-slate-200 hover:border-slate-300"} backdrop-blur-xl rounded-2xl border transition-all duration-300`}
+                className={`p-6 ${darkMode ? "bg-white/5 border-white/10 hover:border-white/20" : "bg-slate-50 border-slate-200 hover:border-slate-300"} rounded-2xl border`}
               >
                 <p className={`text-base ${darkMode ? "text-gray-300" : "text-slate-700"} leading-relaxed`}>
                   Hey there! 👋 I'm a{" "}
@@ -366,7 +341,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
               </div>
 
               <div
-                className={`p-6 ${darkMode ? "bg-white/5 border-white/10 hover:border-white/20" : "bg-slate-50 border-slate-200 hover:border-slate-300"} backdrop-blur-xl rounded-2xl border transition-all duration-300`}
+                className={`p-6 ${darkMode ? "bg-white/5 border-white/10 hover:border-white/20" : "bg-slate-50 border-slate-200 hover:border-slate-300"} rounded-2xl border`}
               >
                 <p className={`text-base ${darkMode ? "text-gray-300" : "text-slate-700"} leading-relaxed`}>
                   With{" "}
@@ -379,7 +354,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
               </div>
 
               <div
-                className={`p-6 ${darkMode ? "bg-white/5 border-white/10 hover:border-white/20" : "bg-slate-50 border-slate-200 hover:border-slate-300"} backdrop-blur-xl rounded-2xl border transition-all duration-300`}
+                className={`p-6 ${darkMode ? "bg-white/5 border-white/10 hover:border-white/20" : "bg-slate-50 border-slate-200 hover:border-slate-300"} rounded-2xl border`}
               >
                 <p className={`text-base ${darkMode ? "text-gray-300" : "text-slate-700"} leading-relaxed`}>
                   When I'm not coding, you'll find me exploring the latest web technologies, contributing to open-source
@@ -439,10 +414,10 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
                   className={`absolute -inset-0.5 bg-gradient-to-r ${skill.gradient} rounded-2xl blur-lg opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
                 />
                 <div
-                  className={`relative h-full ${darkMode ? "bg-white/5 border-white/10 hover:border-white/20" : "bg-slate-50 border-slate-200 hover:border-slate-300"} backdrop-blur-xl rounded-2xl p-6 border transition-all duration-300 hover:scale-105`}
+                  className={`relative h-full ${darkMode ? "bg-white/5 border-white/10 hover:border-white/20" : "bg-slate-50 border-slate-200 hover:border-slate-300"} rounded-2xl p-6 border`}
                 >
                   <div className="text-center space-y-3">
-                    <div className="text-4xl mb-2 transform group-hover:scale-110 transition-transform duration-300">
+                    <div className="text-4xl mb-2">
                       {skill.icon}
                     </div>
                     <h3 className={`text-lg font-semibold ${darkMode ? "text-white" : "text-slate-900"}`}>
@@ -491,13 +466,13 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
                   className={`absolute -inset-1 bg-gradient-to-r ${project.gradient} rounded-3xl blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`}
                 />
                 <div
-                  className={`relative h-full ${darkMode ? "bg-white/5 border-white/10 hover:border-white/20" : "bg-slate-50 border-slate-200 hover:border-slate-300"} backdrop-blur-xl rounded-3xl overflow-hidden border transition-all duration-300 hover:scale-[1.02]`}
+                  className={`relative h-full ${darkMode ? "bg-white/5 border-white/10 hover:border-white/20" : "bg-slate-50 border-slate-200 hover:border-slate-300"} rounded-3xl overflow-hidden border`}
                 >
                   <div className="relative overflow-hidden h-72">
                     <img
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
-                      className="w-full h-full transform group-hover:scale-110 transition-all duration-700"
+                      className="w-full h-full"
                     />
                     <div
                       className={`absolute inset-0 bg-gradient-to-t ${project.gradient} opacity-20 group-hover:opacity-30 transition-opacity`}
@@ -521,7 +496,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
                       {project.tech.map((tech) => (
                         <span
                           key={tech}
-                          className={`px-3 py-1 ${darkMode ? "bg-white/5 border-white/10 text-gray-300" : "bg-white border-slate-200 text-slate-700"} backdrop-blur-xl border rounded-lg text-xs font-medium`}
+                          className={`px-3 py-1 ${darkMode ? "bg-white/5 border-white/10 text-gray-300" : "bg-white border-slate-200 text-slate-700"} border rounded-lg text-xs font-medium`}
                         >
                           {tech}
                         </span>
@@ -533,7 +508,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
                         href={project.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer" 
-                        className={`flex-1 py-3 bg-gradient-to-r ${project.gradient} rounded-xl font-semibold text-sm text-center hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 text-white`}
+                        className={`flex-1 py-3 bg-gradient-to-r ${project.gradient} rounded-xl font-semibold text-sm text-center flex items-center justify-center gap-2 text-white`}
                       >
                         <ExternalLink size={16} />
                         Live Demo
@@ -542,7 +517,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`flex-1 py-3 ${darkMode ? "border-white/20 hover:bg-white/5" : "border-slate-300 hover:bg-slate-100"} border rounded-xl font-semibold text-sm text-center hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 ${darkMode ? "text-white" : "text-slate-900"}`}
+                        className={`flex-1 py-3 ${darkMode ? "border-white/20" : "border-slate-300"} border rounded-xl font-semibold text-sm text-center flex items-center justify-center gap-2 ${darkMode ? "text-white" : "text-slate-900"}`}
                       >
                         <Code size={16} />
                         Code
@@ -574,7 +549,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-500 rounded-3xl blur-2xl opacity-10 group-hover:opacity-20 transition-opacity duration-500" />
             <div
-              className={`relative ${darkMode ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"} backdrop-blur-xl rounded-3xl p-10 border`}
+              className={`relative ${darkMode ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-200"} rounded-3xl p-10 border`}
             >
               <div className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
@@ -623,7 +598,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
                     e.preventDefault()
                     alert("🚀 Message sent! I'll get back to you soon!")
                   }}
-                  className="w-full py-4 bg-white text-slate-950 rounded-xl font-semibold text-sm hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+                  className="w-full py-4 bg-white text-slate-950 rounded-xl font-semibold text-sm flex items-center justify-center gap-2"
                 >
                   <Mail size={18} />
                   Send Message
@@ -643,7 +618,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
                         className={`absolute -inset-1 bg-gradient-to-r ${gradient} rounded-xl blur-lg opacity-30 group-hover:opacity-60 transition-opacity`}
                       />
                       <div
-                        className={`relative p-4 bg-gradient-to-r ${gradient} rounded-xl hover:scale-110 transition-all duration-300 shadow-lg text-white`}
+                        className={`relative p-4 bg-gradient-to-r ${gradient} rounded-xl shadow-lg text-white`}
                       >
                         <Icon size={22} />
                       </div>

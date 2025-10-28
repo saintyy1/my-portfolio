@@ -5,14 +5,12 @@
   --bg-dark:  #0f172a; /* Tailwind slate-950 */
 }
 
-/* Ensure root elements match the app background and enable smooth scroll */
+/* Ensure root elements match the app background */
 html, body, #root, #__next {
   background-color: var(--bg-light);
   min-height: 100%;
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.3s ease;
 }
 
 /* Dark-mode root class — component will toggle this on html */
@@ -22,17 +20,4 @@ html.dark, body.dark, html.dark #root {
 
 body.dark {
   background-color: var(--bg-dark) !important;
-}
-
-/* Reduce sub-pixel flicker for transforms/backdrops */
-* {
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-
-/* Optimize backdrop blur performance */
-[class*="backdrop-blur"] {
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
 }
