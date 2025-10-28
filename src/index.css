@@ -12,11 +12,16 @@ html, body, #root, #__next {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease;
 }
 
 /* Dark-mode root class — component will toggle this on html */
-html.dark, body.dark {
-  background-color: var(--bg-dark);
+html.dark, body.dark, html.dark #root {
+  background-color: var(--bg-dark) !important;
+}
+
+body.dark {
+  background-color: var(--bg-dark) !important;
 }
 
 /* Reduce sub-pixel flicker for transforms/backdrops */
@@ -28,6 +33,9 @@ html.dark, body.dark {
 /* Add performance optimizations for section animations */
 section {
   will-change: opacity;
+  /* Ensure sections always have a background to prevent flashing */
+  background-color: inherit;
+  isolation: isolate;
 }
 
 /* Optimize backdrop blur performance */

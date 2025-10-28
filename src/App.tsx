@@ -6,11 +6,19 @@ import "./index.css";
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
 
-  // ensure the <html> background/class is controlled at app root
+  // ensure the <html> and <body> background/class is controlled at app root
   useEffect(() => {
-    const el = document.documentElement;
-    if (darkMode) el.classList.add("dark");
-    else el.classList.remove("dark");
+    const html = document.documentElement;
+    const body = document.body;
+    if (darkMode) {
+      html.classList.add("dark");
+      body.classList.add("dark");
+      body.style.backgroundColor = "#0f172a";
+    } else {
+      html.classList.remove("dark");
+      body.classList.remove("dark");
+      body.style.backgroundColor = "#ffffff";
+    }
   }, [darkMode]);
 
   return (

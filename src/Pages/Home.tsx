@@ -36,11 +36,10 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
   const [activeSection, setActiveSection] = useState("home")
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
-  const [homeRef, homeHasBeenInView] = useInView();
-  const [aboutRef, aboutHasBeenInView] = useInView();
-  const [skillsRef, skillsHasBeenInView] = useInView();
-  const [projectsRef, projectsHasBeenInView] = useInView();
-  const [contactRef, contactHasBeenInView] = useInView();
+  const [aboutRef, , aboutHasBeenInView] = useInView();
+  const [skillsRef, , skillsHasBeenInView] = useInView();
+  const [projectsRef, , projectsHasBeenInView] = useInView();
+  const [contactRef, , contactHasBeenInView] = useInView();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -221,7 +220,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         )}
       </nav>
 
-      <section id="home" ref={homeRef} className={`relative min-h-screen flex items-center justify-center pt-20 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-700 ${homeHasBeenInView ? "opacity-100" : "opacity-0"}`}>
+      <section id="home" className={`relative min-h-screen flex items-center justify-center pt-20 ${darkMode ? "bg-slate-950" : "bg-white"}`}>
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <div className="space-y-10">
             <div
@@ -315,7 +314,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         </div>
       </section>
 
-      <section id="about" ref={aboutRef} className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-700 ${aboutHasBeenInView ? "opacity-100" : "opacity-0"}`}>
+      <section id="about" ref={aboutRef} className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-500 ${aboutHasBeenInView ? "opacity-100" : "opacity-40"}`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
@@ -424,7 +423,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         </div>
       </section>
 
-      <section id="skills" ref={skillsRef} className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-700 ${skillsHasBeenInView ? "opacity-100" : "opacity-0"}`}>
+      <section id="skills" ref={skillsRef} className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-500 ${skillsHasBeenInView ? "opacity-100" : "opacity-40"}`}>
         <div className="relative max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
@@ -476,7 +475,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         </div>
       </section>
 
-      <section id="projects" ref={projectsRef} className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-700 ${projectsHasBeenInView ? "opacity-100" : "opacity-0"}`}>
+      <section id="projects" ref={projectsRef} className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-500 ${projectsHasBeenInView ? "opacity-100" : "opacity-40"}`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
@@ -563,7 +562,7 @@ const Portfolio = ({ darkMode, setDarkMode }: HomeProps) => {
         </div>
       </section>
 
-      <section id="contact" ref={contactRef} className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-700 ${contactHasBeenInView ? "opacity-100" : "opacity-0"}`}>
+      <section id="contact" ref={contactRef} className={`relative py-32 px-6 lg:px-8 ${darkMode ? "bg-slate-950" : "bg-white"} transition-opacity duration-500 ${contactHasBeenInView ? "opacity-100" : "opacity-40"}`}>
         <div className="relative max-w-4xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-3 mb-4">
